@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>✨Perceptron Calculator✨</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      text-align: center;
+      margin: 40px;
+      background-color: #fff;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: inline-block;
+      font-size: 1.5rem;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    select, input[type="number"] {
+      width: 50px;
+      height: 30px;
+      font-size: 1rem;
+      text-align: center;
+      background-color: #e0e0e0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #bias {
+      margin-left: 10px;
+    }
+
+    button {
+      font-size: 1.2rem;
+      background-color: #f5d84c;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e6c635;
+    }
+
+    #result {
+      font-size: 1.5rem;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>✨✨Perceptron Calculator✨✨</h1>
+  <form id="perceptronForm">
+    <div class="row">
+      (<label for="x1">📥1</label>
+      <select name="x1"><option value="0">0</option><option value="1">1</option></select>
+      * 🏋1 <input type="number" name="w1" value="0" />
+
+      + 📥2 <select name="x2"><option value="0">0</option><option value="1">1</option></select>
+      * 🏋2 <input type="number" name="w2" value="0" />
+
+      + 📥3 <select name="x3"><option value="0">0</option><option value="1">1</option></select>
+      * 🏋3 <input type="number" name="w3" value="0" />
+
+      + 📥4 <select name="x4"><option value="0">0</option><option value="1">1</option></select>
+      * 🏋4 <input type="number" name="w4" value="0" />
+
+      ) + bias<input type="number" name="bias" id="bias" value="0" />
+
+      <button type="submit">Calculate</button>
+    </div>
+  </form>
+
+  <div id="result">Net Input 🌊: 0.00 → Output💥: 0</div>
+
+  <script>
+    document.getElementById("perceptronForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const x = [1, 2, 3, 4].map(i => parseInt(form[`x${i}`].value));
+      const w = [1, 2, 3, 4].map(i => parseFloat(form[`w${i}`].value));
+      const bias = parseFloat(form.bias.value);
+
+      let sum = x.reduce((acc, xi, i) => acc + xi * w[i], 0) + bias;
+      let output = sum > 0 ? 1 : 0;
+
+      document.getElementById("result").innerText = `Net Input 🌊: ${sum.toFixed(2)} → Output💥: ${output}`;
+    });
+  </script>
+</body>
+</html>
